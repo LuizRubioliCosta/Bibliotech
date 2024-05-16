@@ -7,18 +7,24 @@ import { RouterModule } from '@angular/router';
 import { BibliotechService } from './service/bibliotech.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './containers/login/login.component';
+import { RegisterComponent } from './containers/register/register.component';
+import { BibliotechRoutingModule } from './routing.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     CommonModule,
     RouterModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BibliotechRoutingModule
   ],
   providers: [BibliotechService],
   bootstrap: [AppComponent]
