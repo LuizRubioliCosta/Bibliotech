@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Login } from '../models/login.model';
+import { Register } from '../models/register.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,23 +13,23 @@ export class BibliotechService {
 
   constructor(private httpClient: HttpClient) { }
 
-  register(): Observable<any> {
+  register(register: Register): Observable<any> {
     return this.httpClient.post<any>(
       this.apiUrl + 'auth/register',
       {
-        password: 'testing13',
-        email: 'teste13@teste.com',
-        firstName: 'teste13',
-        lastName: 'teste13',
+        password: register.password,
+        email: register.email,
+        firstName: register.firstName,
+        lastName: register.lastName,
       })
     }
 
-    login(): Observable<any> {
+    login(login: Login): Observable<any> {
     return this.httpClient.post<any>(
       this.apiUrl + 'auth/login',
       {
-        password: 'testing13',
-        email: 'teste13@teste.com',
+        password: login.password,
+        email: login.email,
       })
     }
 
