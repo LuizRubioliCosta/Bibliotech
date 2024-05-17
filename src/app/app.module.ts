@@ -5,11 +5,13 @@ import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { BibliotechService } from './service/bibliotech.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './containers/login/login.component';
 import { RegisterComponent } from './containers/register/register.component';
 import { BibliotechRoutingModule } from './routing.module';
+import { JwtInterceptor } from './utils/Jwt-interceptor';
+
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { BibliotechRoutingModule } from './routing.module';
     ReactiveFormsModule,
     BibliotechRoutingModule
   ],
-  providers: [BibliotechService],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, BibliotechService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

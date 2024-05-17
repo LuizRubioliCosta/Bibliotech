@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { BibliotechService } from 'src/app/service/bibliotech.service';
 
 @Component({
@@ -13,7 +14,13 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  test(){
-    this.service.get().subscribe()
+  login(){
+    this.service.login().subscribe( login => {
+      console.log('login' + login)})
+  }
+
+
+  books(): void {
+    this.service.getBooks().subscribe()
   }
 }

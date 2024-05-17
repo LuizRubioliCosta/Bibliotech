@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  test(){
-    this.service.get().subscribe()
+  register(){
+    this.service.register().subscribe()
   }
 }

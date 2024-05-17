@@ -10,8 +10,4 @@ export class AppComponent {
   constructor(private service:BibliotechService) {}
 
   title = 'bibliotech';
-
-  test(){
-    this.service.get().subscribe()
-  }
 }
