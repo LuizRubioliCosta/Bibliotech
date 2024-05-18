@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { BibliotechService } from 'src/app/service/bibliotech.service';
 
 @Component({
@@ -10,7 +12,7 @@ import { BibliotechService } from 'src/app/service/bibliotech.service';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
 
-  constructor(private service: BibliotechService, private fb: FormBuilder) { }
+  constructor(private service: BibliotechService, private fb: FormBuilder, private cookieService: CookieService, private router: Router) { }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -25,7 +27,16 @@ export class LoginComponent implements OnInit {
 
   login(){
     this.service.login(this.loginForm.value).subscribe( login => {
-      console.log('login' + login)})
+      const jwt = login.cookie.value
+      if(!!jwt) {
+      this.service.jwtToken = jwt
+      this.cookieService.set('user', jwt,);
+      this.router.navigate(['collection'])
+      console.log('jwt' + this.service.jwtToken )
+    }})
+
+    ///RETIRAR O NAVIGATE ABAIXO QUANDO BACK TIVER PRONTO
+    //this.router.navigate(['books'])
   }
 
 

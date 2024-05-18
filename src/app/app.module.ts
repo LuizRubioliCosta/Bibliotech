@@ -10,7 +10,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './containers/login/login.component';
 import { RegisterComponent } from './containers/register/register.component';
 import { BibliotechRoutingModule } from './routing.module';
-import { JwtInterceptor } from './utils/Jwt-interceptor';
+
+import { BookDetailsComponent } from './containers/book-details/book-details.component';
+import { JwtInterceptor } from './utils/jwt-interceptor';
+import { BookEditionComponent } from './containers/book-edition/book-edition.component';
+import { BooksComponent } from './containers/books/books.component';
+import { CollectionComponent } from './containers/collection/collection.component';
+import { CollectionItemComponent } from './containers/collection-item/collection-item.component';
+import { NavbarComponent } from './containers/navbar/navbar.component';
+import { NewCollectionComponent } from './containers/new-collection/new-collection.component';
+import { ReadingsComponent } from './containers/readings/readings.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 
 
@@ -18,7 +28,16 @@ import { JwtInterceptor } from './utils/Jwt-interceptor';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    BookDetailsComponent,
+    BookEditionComponent,
+    BooksComponent,
+    CollectionComponent,
+    CollectionItemComponent,
+    NavbarComponent,
+    NewCollectionComponent,
+    ReadingsComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,

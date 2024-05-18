@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { BibliotechService } from 'src/app/service/bibliotech.service';
 
 @Component({
@@ -9,11 +10,16 @@ import { BibliotechService } from 'src/app/service/bibliotech.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
+  optParam!: string;
 
-  constructor(private service: BibliotechService, private fb: FormBuilder) { }
+  constructor(private service: BibliotechService, private fb: FormBuilder, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.initializeForm();
+
+    this.route.params.subscribe(params => {
+      this.optParam = params['opt'];
+    });
   }
 
   initializeForm() {
