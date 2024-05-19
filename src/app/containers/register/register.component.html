@@ -1,4 +1,3 @@
-
 <section class="bg-gray-50 dark:bg-gray-900">
   <div
     class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
@@ -21,7 +20,7 @@
         <h1
           class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"
         >
-         {{optParam === 'new' ? 'Criar sua conta' : 'Edite seus dados'}}
+          {{ optParam === "new" ? "Criar sua conta" : "Edite seus dados" }}
         </h1>
         <form class="space-y-4 md:space-y-6" [formGroup]="registerForm">
           <div>
@@ -34,6 +33,7 @@
               type="first-name"
               name="first-name"
               formControlName="firstName"
+              [value]="registerForm.get('firstName')?.value"
               id="first-name"
               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               required=""
@@ -49,6 +49,7 @@
               type="last-name"
               name="last-name"
               formControlName="lastName"
+              [value]="registerForm.get('lastName')?.value"
               id="last-name"
               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               required=""
@@ -65,6 +66,7 @@
               name="email"
               id="email"
               formControlName="email"
+              [value]="registerForm.get('email')?.value"
               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="name@company.com"
               required=""
@@ -81,19 +83,50 @@
               name="password"
               id="password"
               formControlName="password"
+              [value]="registerForm.get('password')?.value"
               placeholder="••••••••"
               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               required=""
             />
           </div>
 
-          <button
-            (click)="register()"
-            type="button"
-            class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-          >
-          {{optParam === 'new' ? 'Criar sua conta' : 'Atualizar seus dados'}}
-          </button>
+          <div class="flex items-center space-x-4">
+            <button
+              *ngIf="optParam === 'new'"
+              (click)="register()"
+              class="w-full text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+            >
+              Criar sua conta
+            </button>
+            <div class="flex gap-x-2" *ngIf="optParam === 'edit'">
+              <button
+                (click)="register()"
+                class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+              >
+                Atualizar informações
+              </button>
+              <button
+                [routerLink]="'/books'"
+                type="button"
+                class="text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
+              >
+                <svg
+                  class="w-5 h-5 mr-1 -ml-1"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                Descartar alterações
+              </button>
+            </div>
+          </div>
+
           <div *ngIf="optParam === 'new'" class="flex justify-center">
             <p class="text-sm font-light text-gray-500 dark:text-gray-400">
               Já tem uma conta?
@@ -109,4 +142,3 @@
     </div>
   </div>
 </section>
-

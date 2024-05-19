@@ -1,61 +1,56 @@
 <app-navbar></app-navbar>
 <div class="bg-primary-200 h-screen dark:bg-gray-900">
-  <div class="grid grid-cols-5 pt-24">
+  <div class="grid grid-cols-5 pt-16">
     <div
       class="bg-gray-50 h-[446px] col-span-3 col-start-2 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700"
     >
-      <div class="min-w-[280px]">
+      <div class="min-w-[280px] max-w-[280px]">
         <img
           class="object-cover h-full w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
-          src="https://marketplace.canva.com/EAFaQMYuZbo/1/0/1003w/canva-brown-rusty-mystery-novel-book-cover-hG1QhA7BiBU.jpg"
-          alt="Bonnie Avatar"
+          src="https://i0.wp.com/www.olivroaberto.com.br/wp-content/uploads/2015/11/livro-sonho.jpg?fit=1125%2C916&ssl=1"
+          alt="Default book image"
         />
       </div>
       <div class="p-4 flex flex-col grid-rows-2">
         <div class="flex flex-col">
-          <span class="text-xl text-primary-900 font-bold">Soul</span>
+          <span class="text-xl text-primary-900 font-bold">{{
+            bookItem.title
+          }}</span>
           <span class="text-gray-500 dark:text-gray-400 italic"
-            >By Olivia Wilson</span
+            >Autor: {{ bookItem.authors }}</span
           >
           <div class="flex flex-col mt-3 text-black font-light">
-            <span class="dark:text-gray-400"> Ano de publicação: 2021</span>
-            <span class="dark:text-gray-400"> Edição: 23</span>
-            <span class="dark:text-gray-400"> Número de páginas: 223</span>
-            <span class="dark:text-gray-400"> ISBN: 9780596520687</span>
-            <span class="dark:text-gray-400"> Categorias: Drama, Romance</span>
+            <span class="dark:text-gray-400">
+              Ano de publicação: {{ bookItem.publishedYear }}</span
+            >
+            <span class="dark:text-gray-400">
+              Edição: {{ bookItem.edition }}</span
+            >
+            <span class="dark:text-gray-400">
+              Número de páginas: {{ bookItem.pageCount }}</span
+            >
+            <span class="dark:text-gray-400"> ISBN: {{ bookItem.isbn }}</span>
+            <span class="dark:text-gray-400">
+              Categorias: {{ bookItem.categories }}</span
+            >
           </div>
           <span
             class="font-light pr-2 text-justify text-sm mt-2 h-[160px] overflow-auto"
           >
-            A vida que Kim e Krickitt Carpenter conheciam mudou completamente no
-            dia 24 de novembro de 1993, dois meses após o seu casamento, quando
-            a traseira do seu carro foi atingida por uma caminhonete que
-            transitava em alta velocidade. Um ferimento sério na cabeça deixou
-            Krickitt em coma por várias semanas. Quando finalmente despertou,
-            parte da sua memória estava comprometida e ela não conseguia se
-            lembrar de seu marido. Ela não fazia a menor ideia de quem ele era.
-            Essencialmente, a "Krickitt" com quem Kim havia se casado morreu no
-            acidente, e naquele momento ele precisava reconquistar a mulher que
-            amava. A vida que Kim e Krickitt Carpenter conheciam mudou
-            completamente no dia 24 de novembro de 1993, dois meses após o seu
-            casamento, quando a traseira do seu carro foi atingida por uma
-            caminhonete que transitava em alta velocidade. Um ferimento sério na
-            cabeça deixou Krickitt em coma por várias semanas. Quando finalmente
-            despertou, parte da sua memória estava comprometida e ela não
-            conseguia se lembrar de seu marido. Ela não fazia a menor ideia de
-            quem ele era. Essencialmente, a "Krickitt" com quem Kim havia se
-            casado morreu no acidente, e naquele momento ele precisava
-            reconquistar a mulher que amava.
+            {{ bookItem.description }}
           </span>
         </div>
-        <div class="h-full flex items-end pt-2 justify-between">
-          <span
-            class="mt-1 uppercase text-sm font-bold py-1 px-2 text-primary-600 bg-primary-300 rounded border-primary-600 border-[1px]"
-            >Reading</span
-          >
+        <div class="h-full flex items-end justify-center pt-2">
+          <div>
+            <span
+              class="mt-1 uppercase text-sm font-bold py-1 px-2 text-primary-600 bg-primary-300 rounded border-primary-600 border-[1px]"
+              >{{ bookItem.read }}</span
+            >
+          </div>
           <div>
             <button
-              class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-8 lg:px-6 py-4 lg:py-3 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+              (click)="goToEdit()"
+              class="text-white whitespace-nowrap bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-8 lg:px-6 py-4 lg:py-3 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
             >
               Editar livro
             </button>

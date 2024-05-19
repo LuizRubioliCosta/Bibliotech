@@ -46,11 +46,11 @@ const routes: Routes = [
         component: BookDetailsComponent,
       },
       {
-        path: 'book-edition',
+        path: 'book-edition/:opt',
         component: BookEditionComponent,
       },
       {
-        path: 'new-collection',
+        path: 'new-collection/:opt',
         component: NewCollectionComponent,
       },
       {

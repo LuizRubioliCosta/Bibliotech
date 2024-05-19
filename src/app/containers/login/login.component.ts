@@ -31,8 +31,16 @@ export class LoginComponent implements OnInit {
       if(!!jwt) {
       this.service.jwtToken = jwt
       this.cookieService.set('user', jwt,);
+      this.service.user = {
+        id: login.data.id,
+        email: login.data.email,
+        password: '',
+        firstName: login.data.firstName,
+        lastName: login.data.lastName
+      }
+      this.service.userId = login.data.id
+      this.getInfos()
       this.router.navigate(['collection'])
-      console.log('jwt' + this.service.jwtToken )
     }})
 
     ///RETIRAR O NAVIGATE ABAIXO QUANDO BACK TIVER PRONTO
@@ -40,7 +48,8 @@ export class LoginComponent implements OnInit {
   }
 
 
-  books(): void {
-    this.service.getBooks().subscribe()
+  getInfos(): void {
+    this.service.getBooks().subscribe(books => this.service.bookList = books)
+    this.service.getCollections().subscribe(collections => this.service.collectionList = collections)
   }
 }

@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="bg-primary-200 h-screen dark:bg-gray-900">
-  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+  <div class="py-4 px-4 mx-auto max-w-screen-xl lg:py-8 lg:px-6">
     <div class="my-4 flex flex-col">
       <label
         for="categories"
@@ -8,7 +8,7 @@
         >Status de leitura</label
       >
       <div class="flex">
-        <div *ngFor="let item of items">
+        <div *ngFor="let item of status">
           <div class="mb-4 mr-5">
             <div class="flex items-center">
               <input
@@ -28,16 +28,16 @@
         </div>
       </div>
     </div>
-    <div *ngIf="items.length" class="grid gap-8 mb-6 lg:mb-16 md:grid-cols-3">
-      <div *ngFor="let item of items">
+    <div *ngIf="books.length" class="grid gap-8 mb-6 lg:mb-16 md:grid-cols-3">
+      <div *ngFor="let item of books">
         <div
           role="button"
           class="bg-gray-50 h-[180px] rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700"
         >
-          <div class="min-w-[120px]">
+          <div class="min-w-[120px] max-w-[120px]">
             <img
               class="object-cover h-full w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
-              src="https://marketplace.canva.com/EAFaQMYuZbo/1/0/1003w/canva-brown-rusty-mystery-novel-book-cover-hG1QhA7BiBU.jpg"
+              src="https://i0.wp.com/www.olivroaberto.com.br/wp-content/uploads/2015/11/livro-sonho.jpg?fit=1125%2C916&ssl=1"
               alt="Bonnie Avatar"
             />
           </div>
@@ -70,20 +70,32 @@
       </div>
     </div>
 
-    <!-- <div *ngIf="!items.length" class="flex items-center flex-col mt-20">
-      <img class="w-44 h-44 mr-4" src="../assets/icons/select.png" alt="logo" />
-      <div class="mt-6 text-2xl text-primary-600">
-        Selecione um status de leitura
-      </div>
-    </div> -->
-
-    <div *ngIf="!items.length" class="flex items-center flex-col">
+    <div
+      *ngIf="!collections?.length"
+      class="flex items-center flex-col"
+    >
       <img class="w-64 h-64 mr-4" src="../assets/icons/empty.png" alt="logo" />
       <div class="mt-4 text-4xl text-primary-600">Comece sua coleção</div>
       <button
         class="text-white mt-4 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-8 lg:px-6 py-4 lg:py-3 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
       >
         Criar nova coleção
+      </button>
+    </div>
+
+    <div
+      *ngIf="!books?.length && !!collections?.length"
+      class="flex items-center flex-col"
+    >
+      <img class="w-64 h-64 mr-4" src="../assets/icons/empty.png" alt="logo" />
+      <div class="mt-4 text-4xl text-primary-600">
+        Adicione um livro a sua coleção
+      </div>
+      <button
+        [routerLink]="['/book-edition', 'new']"
+        class="text-white mt-4 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-8 lg:px-6 py-4 lg:py-3 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+      >
+        Criar novo livro
       </button>
     </div>
   </div>

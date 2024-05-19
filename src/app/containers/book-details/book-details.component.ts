@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Book } from 'src/app/models/book.model';
+import { BibliotechService } from 'src/app/service/bibliotech.service';
 
 @Component({
   selector: 'app-book-details',
@@ -6,10 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./book-details.component.css']
 })
 export class BookDetailsComponent implements OnInit {
+  bookItem!: Book
 
-  constructor() { }
+  constructor(private service: BibliotechService, private router: Router) {}
 
   ngOnInit(): void {
+    this.bookItem = this.service.bookItem
   }
 
+
+  goToEdit() {
+    this.service.bookItem = this.bookItem
+    this.router.navigate(['/book-edition', 'edit'])
+  }
 }

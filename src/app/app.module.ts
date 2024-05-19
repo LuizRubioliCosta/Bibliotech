@@ -12,7 +12,7 @@ import { RegisterComponent } from './containers/register/register.component';
 import { BibliotechRoutingModule } from './routing.module';
 
 import { BookDetailsComponent } from './containers/book-details/book-details.component';
-import { JwtInterceptor } from './utils/jwt-interceptor';
+import { AddBodyToGetInterceptor } from './utils/jwt-interceptor';
 import { BookEditionComponent } from './containers/book-edition/book-edition.component';
 import { BooksComponent } from './containers/books/books.component';
 import { CollectionComponent } from './containers/collection/collection.component';
@@ -48,7 +48,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     BibliotechRoutingModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, BibliotechService
+    { provide: HTTP_INTERCEPTORS, useClass: AddBodyToGetInterceptor, multi: true }, BibliotechService
   ],
   bootstrap: [AppComponent]
 })
