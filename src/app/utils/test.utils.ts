@@ -10,9 +10,10 @@ export const mockedUser: Register = {
 }
 
 export const mockedCollection: Collection = {
+  id: 7,
   title: "title",
   description: "description",
-  userId: "id"
+  userId: 21
 }
 
 export const mockedBook: Book = {

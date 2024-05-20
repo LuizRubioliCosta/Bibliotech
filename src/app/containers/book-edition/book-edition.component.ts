@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 import { Book } from 'src/app/models/book.model';
 import { Status } from 'src/app/models/status.enum';
 import { BibliotechService } from 'src/app/service/bibliotech.service';
-import { mockedBook } from 'src/app/utils/test.utils';
+import { mockedBook, mockedCollection } from 'src/app/utils/test.utils';
 
 @Component({
   selector: 'app-book-edition',
@@ -14,14 +14,14 @@ import { mockedBook } from 'src/app/utils/test.utils';
 })
 export class BookEditionComponent implements OnInit {
 
-  collections = ['drama', 'romance', 'ação'];
+  categories = ['drama', 'romance', 'ação'];
   status = Object.values(Status);
   isEdit = false;
   optParam!: string;
   bookItem!: Book;
   bookForm!: FormGroup;
 
-  constructor(private service: BibliotechService, private fb: FormBuilder, private route: ActivatedRoute) { }
+  constructor(private service: BibliotechService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     initFlowbite();
@@ -72,7 +72,7 @@ export class BookEditionComponent implements OnInit {
   }
 
   onSave() {
-    this.bookItem = {
+   /* this.bookItem = {
       title: this.bookForm.get('title')?.value,
       authors: this.bookForm.get('authors')?.value.split(','),
       publishedYear: this.bookForm.get('publishedYear')?.value,
@@ -83,16 +83,31 @@ export class BookEditionComponent implements OnInit {
       categories: this.bookForm.get('categories')?.value,
       read: this.bookForm.get('read')?.value,
       collection: this.bookForm.get('collection')?.value,
+    } */
+
+    this.bookItem = {
+      title: this.bookForm.get('title')?.value,
+      authors: this.bookForm.get('authors')?.value.split(','),
+      publishedYear: this.bookForm.get('publishedYear')?.value,
+      description: this.bookForm.get('description')?.value,
+      edition: this.bookForm.get('edition')?.value,
+      isbn: this.bookForm.get('isbn')?.value,
+      pageCount: this.bookForm.get('pageCount')?.value,
+      categories: ['drama'],
+      read: 'read',
+      collection: mockedCollection,
     }
 
     if(this.isEdit) {
-      this.service.updateBook(this.bookItem)
+      this.service.updateBook(this.bookItem).subscribe()
     } else {
-      this.service.saveBook(this.bookItem)
+      this.service.saveBook(this.bookItem).subscribe()
     }
+    this.router.navigate(['books'])
   }
 
   onRemove() {
-   // this.service.removeBook().subscribe()
+   this.service.removeBook(this.bookItem.id).subscribe()
+   this.router.navigate(['books'])
   }
 }

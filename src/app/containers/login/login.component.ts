@@ -39,12 +39,10 @@ export class LoginComponent implements OnInit {
         lastName: login.data.lastName
       }
       this.service.userId = login.data.id
+
       this.getInfos()
       this.router.navigate(['collection'])
     }})
-
-    ///RETIRAR O NAVIGATE ABAIXO QUANDO BACK TIVER PRONTO
-    //this.router.navigate(['books'])
   }
 
 

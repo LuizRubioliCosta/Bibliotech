@@ -12,14 +12,17 @@ import { mockedBook, mockedCollection, mockedUser } from '../utils/test.utils';
 })
 export class BibliotechService {
   bookItem: Book = mockedBook;
-  bookList!: Book[];
+  bookList: Book[] = [mockedBook]
   collectionItem: Collection = mockedCollection;
-  collectionList!: Collection[];
+  collectionList: Collection[] = [mockedCollection]
   user: Register = mockedUser;
   userId!: string;
 
-  private apiUrl = 'http://ec2-34-227-221-24.compute-1.amazonaws.com/';
+  private apiUrl = 'http://ec2-34-201-111-58.compute-1.amazonaws.com/';
   jwtToken = '';
+
+  fakeUserId = 21
+  fakeJWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6IjIxIn0sImlhdCI6MTcxNjE2MTc0NCwiZXhwIjoxNzE4NzUzNzQ0fQ.mF4AsRGtLgZZkzTUy6JUO-rz11ismG_c4j9xgKAfF-A'
 
   constructor(private httpClient: HttpClient) {}
 // auth
@@ -52,32 +55,66 @@ export class BibliotechService {
 
   updateBook(book: Book): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `${this.jwtToken}`,
+      Authorization: `${this.fakeJWT}`,
     });
-    const params = new HttpParams().set('userId', this.userId);
-
 
     return this.httpClient.put<any>(
       this.apiUrl + 'book/',
       {
-        book,
+        id: book.id,
+        title: book.title,
+        authors: book.authors,
+        publishedYear: book.publishedYear,
+        description: book.description,
+        edition: book.edition,
+        isbn: book.isbn,
+        pageCount: book.pageCount,
+        categories: book.categories,
+        read: book.read,
+        collection: book.collection,
+        userId: this.fakeUserId
       },
-      { headers, params }
+      { headers }
     );
   }
 
   saveBook(book: Book): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `${this.jwtToken}`,
+      Authorization: `${this.fakeJWT}`,
     });
-    const params = new HttpParams().set('userId', this.userId);
 
     return this.httpClient.post<any>(
       this.apiUrl + 'book/',
       {
-        book,
+        title: book.title,
+        authors: book.authors,
+        publishedYear: book.publishedYear,
+        description: book.description,
+        edition: book.edition,
+        isbn: book.isbn,
+        pageCount: book.pageCount,
+        categories: book.categories,
+        read: book.read,
+        collection: book.collection,
+        userId: this.fakeUserId
       },
-      { headers, params }
+      { headers }
+    )
+  }
+
+  removeBook(bookId: number | undefined): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `${this.fakeJWT}`,
+    });
+
+    const body = {
+      userId: this.fakeUserId,
+      id: bookId
+    };
+
+    return this.httpClient.delete<any>(
+      this.apiUrl + 'book/',
+      { headers, body }
     );
   }
 
@@ -92,13 +129,61 @@ export class BibliotechService {
     return this.httpClient.get<any>(this.apiUrl + 'collection/', { headers, params });
   }
 
+  updateCollection(collection: Collection): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `${this.fakeJWT}`,
+    });
+
+    return this.httpClient.put<any>(
+      this.apiUrl + 'collection/',
+      {
+        id: collection.id,
+        title: collection.title,
+        description: collection.description,
+        userId: this.fakeUserId
+      },
+      { headers }
+    );
+  }
+
+  saveCollection(collection: Collection): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `${this.fakeJWT}`,
+    });
+
+    return this.httpClient.post<any>(
+      this.apiUrl + 'collection/',
+      {
+        title: collection.title,
+        description: collection.description,
+        userId: this.fakeUserId
+      },
+      { headers }
+    );
+  }
+
+  removeCollection(collectionId: number | undefined): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `${this.fakeJWT}`,
+    });
+
+    const body = {
+      userId: this.fakeUserId,
+      id: collectionId
+    };
+
+    return this.httpClient.delete<any>(
+      this.apiUrl + 'collection/',
+      { headers, body }
+    );
+  }
+
 
   // user
   updateUser(register: Register): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `${this.jwtToken}`,
+      Authorization: `${this.fakeJWT}`,
     });
-    const params = new HttpParams().set('userId', this.userId);
 
 
     return this.httpClient.put<any>(
@@ -108,8 +193,9 @@ export class BibliotechService {
         email: register.email,
         firstName: register.firstName,
         lastName: register.lastName,
+        userId: this.fakeUserId
       },
-      { headers, params }
+      { headers }
     );
   }
 
